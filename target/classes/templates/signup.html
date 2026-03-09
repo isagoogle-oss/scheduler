@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<link
+	href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Sawarabi+Mincho&display=swap"
+	rel="stylesheet">
+<link rel="Stylesheet" href="../static/css/style02-signup.css" th:href="@{/css/style02-signup.css}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ユーザー登録</title>
+</head>
+
+<body>
+	<div class="header-title">
+		<h1>Sign Up</h1>
+		<p class="sub-title">Daily Planner & Time Management</p>
+	</div>
+	<div class="login-container">
+		<!-- 左側 -->
+		<div class="left">
+			<h2>ユーザー登録</h2>
+			<!-- Spring Boot の Controller に POST 送信 -->
+			<!-- Tymeleafに変更済み（"/register"） -->
+			<div th:if="${errorMessage}" style="color: red; margin-bottom: 10px;">
+				<p th:text="${errorMessage}"></p>
+			</div>
+			<form th:action="@{/signup}" method="post">
+				<div>
+					<label for="username">ユーザーID：</label>
+					<input type="text" id="username" name="name" required>
+				</div>
+
+				<div>
+					<label for="password">パスワード：</label>
+					<input type="password" id="password" name="passwordHash" required>
+				</div>
+				<button type="submit">登録</button>
+			</form>
+			<!-- Tymeleafに変更済み（"/index.html"） -->
+			<p class="signup-text"><a th:href="@{/}">ログイン画面へ戻る</a></p>
+		</div>
+
+		<!-- 右側：説明-->
+		<div class="signup-benefits">
+			<h2>新規ユーザー登録で、時間管理をもっと楽しく</h2>
+			<p>自分だけのカスタム円グラフが、あなたの24時間を美しくデザインします。<br>
+				スケジュールを色で管理して、忙しい毎日に<strong>「色」</strong>を取り入れましょう。</p>
+			<ul class="benefits-list">
+				<li>色分け機能で予定を一目で把握</li>
+				<li>大事な予定をあなたの代わりに記憶</li>
+				<li>いつでもどこでも予定をチェック</li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+</html>

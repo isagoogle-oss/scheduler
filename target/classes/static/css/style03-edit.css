@@ -1,0 +1,396 @@
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+body {
+	animation: fadeIn 0.8s ease-out forwards;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 10px;
+	min-height: 100vh;
+	margin: 0;
+	padding: 40px 100px;
+	font-family: sans-serif;
+	background-color: #f9f9f9;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	background-image: url(../img/cork_board.jpg);
+}
+
+.form-container,
+.schedules-container {
+	flex-shrink: 0;
+	/*形が崩れないようにする */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* 左側 */
+.form-container {
+	position: relative;
+	width: 95%;
+	max-width: 450px;
+	padding: 50px 30px 30px 30px;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.1);
+	margin-top: 30px;
+}
+
+/* ピンの「頭」部分 */
+.pin-left,
+.pin-right {
+	position: absolute;
+	top: -12px;
+	/* 少し上に浮かせる */
+	width: 20px;
+	height: 20px;
+	background-color: #0056b3;
+	border-radius: 50%;
+	box-shadow:
+		inset -3px -3px 5px rgba(0, 0, 0, 0.2),
+		0 3px 5px rgba(0, 0, 0, 0.3);
+	z-index: 10;
+}
+
+/* ピンの針（影のような演出） */
+.pin-left::after,
+.pin-right::after {
+	content: "";
+	position: absolute;
+	top: 18px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 2px;
+	height: 6px;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* 左ピンの位置 */
+.pin-left {
+	left: 20px;
+	margin-top: 30px;
+}
+
+/* 右ピンの位置 */
+.pin-right {
+	right: 20px;
+	margin-top: 30px;
+}
+
+
+/* 日本語タイトル部分の調整 */
+
+h1 {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	border-bottom: none;
+	color: white;
+	-webkit-text-stroke: 1px #ccc;
+	font-size: 30px;
+	font-weight: 900;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	line-height: 1.2;
+	max-width: 100%;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+input[type="text"],
+select {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 25px;
+	font-size: 1em;
+}
+
+.time-select-group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+}
+
+.time-select-group select {
+	flex: none;
+	width: 80px;
+}
+
+/* カラーカテゴリーのカラー設定1番下に記載してます */
+select[name="categoryColor"] {
+	width: 100%;
+	background-color: #fcfcfc;
+	cursor: pointer;
+	text-align: center;
+}
+
+.btn-submit {
+	width: 100%;
+	padding: 12px;
+	background-color: #f2f2f2;
+	color: #555;
+	border: 1px solid #ddd;
+	border-radius: 25px;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.btn-submit:hover {
+	/*触れると浮く動き */
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*キャンセル画面*/
+.cancel-link {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.cancel-link a {
+	color: #444;
+	text-decoration: none;
+	font-size: 0.9em;
+	cursor: pointer;
+}
+
+.cancel-link a:hover {
+	text-decoration: underline;
+}
+
+/* 右側 */
+
+.schedules-container {
+	position: relative;
+	width: 95%;
+	max-width: 450px;
+	padding: 60px 25px 30px 25px;
+	border: none;
+	border-radius: 2px;
+	background-color: white;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+	margin-top: 30px;
+
+}
+
+/* マスキングテープ */
+.schedules-container::before {
+	content: "";
+	position: absolute;
+	top: -15px;
+	left: 50%;
+	transform: translateX(-50%) rotate(-2deg);
+	width: 120px;
+	height: 35px;
+	background: #ffffcc;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	border-left: 2px dotted rgba(255, 255, 255, 0.5);
+	border-right: 2px dotted rgba(255, 255, 255, 0.5);
+	z-index: 10;
+}
+
+.schedules-container h2 {
+	font-family: 'cursive', sans-serif;
+	font-size: 1.3em;
+	color: #444;
+	text-align: center;
+	margin-bottom: 20px;
+	border-bottom: 2px dashed rgba(0, 86, 179, 0.3);
+	padding-bottom: 10px;
+}
+
+.no-data {
+	text-align: center;
+	padding: 20px;
+	font-size: 0.9em;
+}
+
+.schedule-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+
+.schedule-info {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* 右側の予定一覧にあるバッジの設定 */
+.category-badge {
+	display: inline-block;
+	/* 幅と高さを持たせるために必要 */
+	width: 12px;
+	height: 12px;
+	border-radius: 2px;
+	/* 丸くする場合。四角が良ければ 2px 程度に */
+	flex-shrink: 0;
+	/* 潰れないように固定 */
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	/* 薄い枠線を入れると白っぽい色でも見やすくなります */
+}
+
+.time-display {
+	font-size: 0.9em;
+	margin-top: 2px;
+}
+
+.btn-edit {
+	font-size: 0.8em;
+	color: #0056b3;
+	text-decoration: none;
+	padding: 4px 8px;
+	border: 1px solid #0056b3;
+	border-radius: 25px;
+	cursor: pointer;
+}
+
+.btn-edit:hover {
+	background: #0056b3;
+	color: #fff;
+}
+
+.delete-link {
+	background: none;
+	border: none;
+	color: #ff4d4d;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+.delete-link:hover {
+	color: #ff4d4d;
+	text-decoration: underline;
+}
+
+/* カラーラベルの色（長いので下に記入してます）*/
+/* 赤  */
+select[name="categoryColor"]:has(option[value="#ff0000"]:checked) {
+	background: linear-gradient(135deg, #ff5f6d 0%, #ffc371 100%);
+	color: #444;
+}
+
+/* 青  */
+select[name="categoryColor"]:has(option[value="#0000ff"]:checked) {
+	background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+	color: #444;
+}
+
+/* 緑  */
+select[name="categoryColor"]:has(option[value="#00ff00"]:checked) {
+	background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+	color: #444;
+}
+
+/* 黄色 */
+select[name="categoryColor"]:has(option[value="#ffff00"]:checked) {
+	background: linear-gradient(135deg, #fff720 0%, #ffdf00 100%);
+	color: #444;
+}
+
+/* 紫 */
+select[name="categoryColor"]:has(option[value="#800080"]:checked) {
+	background: linear-gradient(135deg, #a18cd1 0%, #d1a6ff 100%);
+	color: #444;
+}
+
+/* ピンク */
+select[name="categoryColor"]:has(option[value="#ff69b4"]:checked) {
+	background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+	color: #444;
+}
+
+/* オレンジ */
+select[name="categoryColor"]:has(option[value="#ffa500"]:checked) {
+	background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+	color: #444;
+}
+
+/* グレー */
+select[name="categoryColor"]:has(option[value="#808080"]:checked) {
+	background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+	color: #444;
+}
+
+/* --- ピンの色設定 --- */
+
+/* 共通：ピンのベースカラー（何も選ばれていない時のデフォルト） */
+.pin-left,
+.pin-right {
+	transition: background-color 0.3s ease;
+	/* 色が変わる時にふわっとさせる */
+}
+
+/* 赤 */
+.form-container:has(option[value="#ff0000"]:checked) .pin-left,
+.form-container:has(option[value="#ff0000"]:checked) .pin-right {
+	background-color: #ff5f6d;
+}
+
+/* 青 */
+.form-container:has(option[value="#0000ff"]:checked) .pin-left,
+.form-container:has(option[value="#0000ff"]:checked) .pin-right {
+	background-color: #a1c4fd;
+}
+
+/* 緑 */
+.form-container:has(option[value="#00ff00"]:checked) .pin-left,
+.form-container:has(option[value="#00ff00"]:checked) .pin-right {
+	background-color: #96e6a1;
+}
+
+/* 黄色 */
+.form-container:has(option[value="#ffff00"]:checked) .pin-left,
+.form-container:has(option[value="#ffff00"]:checked) .pin-right {
+	background-color: #ffdf00;
+}
+
+/* 紫 */
+.form-container:has(option[value="#800080"]:checked) .pin-left,
+.form-container:has(option[value="#800080"]:checked) .pin-right {
+	background-color: #a18cd1;
+}
+
+/* ピンク */
+.form-container:has(option[value="#ff69b4"]:checked) .pin-left,
+.form-container:has(option[value="#ff69b4"]:checked) .pin-right {
+	background-color: #ff9a9e;
+}
+
+/* オレンジ */
+.form-container:has(option[value="#ffa500"]:checked) .pin-left,
+.form-container:has(option[value="#ffa500"]:checked) .pin-right {
+	background-color: #ffb347;
+}
+
+/* グレー */
+.form-container:has(option[value="#808080"]:checked) .pin-left,
+.form-container:has(option[value="#808080"]:checked) .pin-right {
+	background-color: #ccc;
+}

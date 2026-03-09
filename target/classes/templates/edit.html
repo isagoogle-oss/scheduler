@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1日の予定設定</title>
+	<link rel="stylesheet" href="../static/css/style03-edit.css" th:href="@{/css/style03-edit.css}">
+</head>
+
+<body>
+	<div class="form-container">
+		<div class="pin-left"></div>
+		<div class="pin-right"></div>
+
+		<h1>
+			<span class="en-title">Edit Schedule</span>
+			<br>
+			<span th:text="${session.user.name}">ユーザー</span>さんの<br>
+			<span th:text="${selectedWeekName}">月曜日</span> の予定
+		</h1>
+
+		<div th:if="${successMessage}"
+			style="color: #28a745; font-weight: bold; margin-bottom: 20px; text-align: center;">
+			<span th:text="${successMessage}"></span>
+		</div>
+		<div th:if="${errorMessage}"
+			style="color: #ff4d4d; font-weight: bold; margin-bottom: 20px; text-align: center; font-size: 0.9em;">
+			<span th:text="${errorMessage}"></span>
+		</div>
+
+		<form th:action="@{/edit}" method="post" onsubmit="combineTime()">
+			<input type="hidden" name="weekday" th:value="${selectedWeek}">
+			<input type="hidden" name="id" th:value="${schedule?.id}">
+
+			<input type="hidden" name="startTimeStr" id="startTimeStr">
+			<input type="hidden" name="endTimeStr" id="endTimeStr">
+
+			<div class="form-group">
+				<label>予定の内容</label>
+				<input type="text" name="categoryName" th:value="${schedule?.categoryName}" placeholder="例：睡眠" required>
+			</div>
+
+			<div class="form-group">
+				<label>⏱ 開始時刻</label>
+				<div class="time-select-group">
+					<select id="startH" required>
+						<option th:each="h : ${#numbers.sequence(0, 23)}" th:value="${#numbers.formatInteger(h, 2)}"
+							th:text="${#numbers.formatInteger(h, 2)}" th:selected="${startHour == h}"></option>
+					</select>
+					:
+					<select id="startM" required>
+						<option th:each="m : ${#numbers.sequence(0, 59)}" th:value="${#numbers.formatInteger(m, 2)}"
+							th:text="${#numbers.formatInteger(m, 2)}" th:selected="${startMin == m}"></option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>⏱ 終了時刻</label>
+				<div class="time-select-group">
+					<select id="endH" required>
+						<option th:each="h : ${#numbers.sequence(0, 23)}" th:value="${#numbers.formatInteger(h, 2)}"
+							th:text="${#numbers.formatInteger(h, 2)}" th:selected="${endHour == h}"></option>
+					</select>
+					:
+					<select id="endM" required>
+						<option th:each="m : ${#numbers.sequence(0, 59)}" th:value="${#numbers.formatInteger(m, 2)}"
+							th:text="${#numbers.formatInteger(m, 2)}" th:selected="${endMin == m}"></option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>ラベルカラー</label>
+				<select name="categoryColor" required>
+					<option value="#ff0000" th:selected="${schedule?.categoryColor == '#ff0000'}">赤</option>
+					<option value="#0000ff" th:selected="${schedule?.categoryColor == '#0000ff'}">青</option>
+					<option value="#00ff00" th:selected="${schedule?.categoryColor == '#00ff00'}">緑</option>
+					<option value="#ffff00" th:selected="${schedule?.categoryColor == '#ffff00'}">黄色</option>
+					<option value="#800080" th:selected="${schedule?.categoryColor == '#800080'}">紫</option>
+					<option value="#ff69b4" th:selected="${schedule?.categoryColor == '#ff69b4'}">ピンク</option>
+					<option value="#ffa500" th:selected="${schedule?.categoryColor == '#ffa500'}">オレンジ</option>
+					<option value="#808080" th:selected="${schedule?.categoryColor == '#808080'}">グレー</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn-submit">これで登録する！</button>
+		</form>
+
+		<div class="cancel-link">
+			<p><a th:href="@{/mypage(week=${selectedWeek})}">マイページへ戻る</a></p>
+		</div>
+	</div>
+	<div class="schedules-container">
+		<h2><span th:text="${selectedWeekName}">月曜日</span> の予定一覧</h2>
+		<div class="schedule-list">
+			<div th:each="s : ${schedules}" class="schedule-item">
+				<div class="schedule-info">
+					<span class="category-badge" th:style="|background-color: ${s.categoryColor}|"></span>
+					<div class="details">
+						<strong class="category-text" th:text="${s.categoryName}"></strong>
+						<div class="time-display">
+							<span
+								th:text="|${s.startTime/60}:${#numbers.formatInteger(s.startTime%60, 2)} ～ ${s.endTime/60}:${#numbers.formatInteger(s.endTime%60, 2)}|"></span>
+						</div>
+					</div>
+				</div>
+				<div class="schedule-actions">
+					<a th:href="@{/edit(id=${s.id}, week=${selectedWeek})}" class="btn-edit">編集</a>
+					<form th:action="@{/delete}" method="post" style="display: inline;">
+						<input type="hidden" name="id" th:value="${s.id}">
+						<input type="hidden" name="weekday" th:value="${selectedWeek}">
+						<button type="submit" class="action-link delete-link"
+							onclick="return confirm('本当に削除しますか？')">削除</button>
+					</form>
+				</div>
+			</div>
+			<div th:if="${#lists.isEmpty(schedules)}" class="no-data">予定がありません。</div>
+		</div>
+	</div>
+	<script>
+		/**
+		 * 送信ボタンが押されたとき、プルダウンの「時」と「分」を
+		 * コントローラーが読める "HH:mm" 形式に合成して隠し入力欄に入れます。
+		 */
+		function combineTime() {
+			const startH = document.getElementById('startH').value;
+			const startM = document.getElementById('startM').value;
+			const endH = document.getElementById('endH').value;
+			const endM = document.getElementById('endM').value;
+
+			document.getElementById('startTimeStr').value = startH + ":" + startM;
+			document.getElementById('endTimeStr').value = endH + ":" + endM;
+		}
+	</script>
+</body>
+
+</html>

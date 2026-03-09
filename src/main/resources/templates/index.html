@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<link
+	href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Sawarabi+Mincho&display=swap"
+	rel="stylesheet">
+<link rel="Stylesheet" href="../static/css/style01-index.css" th:href="@{/css/style01-index.css}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ログイン</title>
+</head>
+<div class="header-title">
+	<h1>My Schedule</h1>
+	<p class="sub-title">Daily Planner & Time Management</p>
+</div>
+
+<body>
+	<div class="login-container">
+		<!-- 左側：ログイン -->
+		<div class="left">
+			<h2>ログイン</h2>
+			<div th:if="${errorMessage}" style="color: red; margin-bottom: 10px;">
+				<p th:text="${errorMessage}"></p>
+			</div>
+			<!-- Spring Boot の Controller に POST 送信 -->
+			<!-- Tymeleafに変更済み（action="/login"）-->
+			<form th:action="@{/login}" method="post">
+				<div>
+					<label for="user">ユーザーID：</label>
+					<input type="text" id="user" name="name" required>
+				</div>
+				<div>
+					<label for="password">パスワード：</label>
+					<input type="password" id="password" name="passwordHash" required>
+				</div>
+				<button type="submit">ログイン</button>
+			</form>
+			<!-- Thymeleaf追加 --><!-- エラーメッセージがある場合のみ表示される -->
+		</div>
+
+		<!-- 右側：新規登録-->
+		<div class="signup-text">
+			<h2>初めてご利用の方</h2>
+			<p>会員登録をすると便利な機能が利用できます。</p>
+			<a href="/signup">新規ユーザー登録はこちら</a>
+		</div>
+	</div>
+</body>
+
+</html>

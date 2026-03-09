@@ -1,0 +1,155 @@
+/*indexのページの設定 */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+body {
+	animation: fadeIn 0.8s ease-out forwards;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	font-family: sans-serif;
+	background-color: #f9f9f9;
+
+	flex-direction: column;
+	/* 追記：要素を縦に並べる */
+	gap: 40px;
+	/* タイトルとフォームの間の距離 */
+
+	background-image: url('../img/Gemini_Generated_Image_2c1ejw2c1ejw2c1e.png');
+	background-size: cover;
+	/* アスペクト比を保ち画面全体を覆う */
+	background-position: center;
+	/* 画像の中央を基準にする */
+	background-repeat: no-repeat;
+	width: 100vw;
+	height: 100vh;
+}
+
+/* タイトル部分の装飾 */
+.header-title {
+	text-align: center;
+	animation: fadeIn 1.2s ease-out;
+}
+
+.header-title h1 {
+	font-family: 'Playfair Display', serif;
+	/* カッコいいセリフ体 */
+	font-size: 4rem;
+	/* 大きく表示 */
+	font-style: italic;
+	/* 斜体でこなれ感を出す */
+	margin: 0;
+	color: #333;
+	letter-spacing: 2px;
+	text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+	/* 文字を浮き立たせる */
+}
+
+.header-title .sub-title {
+	font-family: 'Sawarabi Mincho', serif;
+	font-size: 1rem;
+	color: #666;
+	margin-top: 5px;
+	letter-spacing: 0.3em;
+	text-transform: uppercase;
+	/* 小文字で打っても大文字になる（モダン） */
+}
+
+.login-container {
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	/*左右の枠の高さ */
+	gap: 80px;
+	max-width: 900px;
+	width: 95%;
+}
+
+/* 両サイドの四角枠枠設定 */
+.left,
+.signup-text {
+	flex: 1;
+	max-width: 350px;
+	padding: 40px 30px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	background-color: #fff;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ユーザー名およびpassword相違の表示 */
+.left div[style*="color: red"] p {
+	white-space: nowrap;
+	/* 改行を禁止する指示 */
+	font-size: 1.0em;
+	letter-spacing: -0.02em;
+}
+
+/* 左側 */
+.left h2 {
+	margin-top: 0;
+}
+
+.left form div {
+	margin-bottom: 20px;
+	/* 項目間の隙間 */
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+input[type="text"],
+input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+button {
+	width: 100%;
+	padding: 12px;
+	background-color: #0056b3;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 1em;
+	margin-top: 10px;
+}
+
+button:hover {
+	opacity: 0.7;
+}
+
+/* 右側　*/
+
+.signup-text h2 {
+	margin-top: 0;
+}
+
+.signup-text a {
+	display: inline-block;
+	margin-top: 15px;
+	color: #0056b3;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.signup-text a:hover {
+	text-decoration: underline;
+}

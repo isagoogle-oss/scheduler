@@ -1,0 +1,164 @@
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+body {
+	animation: fadeIn 0.8s ease-out forwards;
+	font-family: sans-serif;
+	background-color: #fff;
+	margin: 0;
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	box-sizing: border-box;
+	background-color: #fdfaf4;
+	/* 柔らかいクリーム色の紙質 */
+	background-image:
+		/* 薄いグレーの方眼線 */
+		linear-gradient(rgba(0, 0, 0, .05) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(0, 0, 0, .05) 1px, transparent 1px);
+	background-size: 25px 25px;
+	/* 方眼のサイズ */
+	font-family: 'Sawarabi Gothic', 'Hiragino Maru Gothic ProN', sans-serif;
+}
+
+/* 今日は○曜日です */
+.top-info {
+	width: 100%;
+	max-width: 900px;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+.top-info h2 {
+	font-size: 20px;
+	font-weight: normal;
+	color: #444;
+	margin: 0;
+	display: inline-block;
+	position: relative;
+}
+
+#todayLabel {
+	font-size: 26px;
+	color: #333;
+	font-weight: bold;
+	padding: 0 6px;
+	margin: 0 4px;
+	background: linear-gradient(transparent 60%, #b9f6ca 60%);
+	/*蛍光ペンみたいな線*/
+	display: inline-block;
+	transform: rotate(-1deg);
+}
+
+
+/* グラフエリア */
+.main-content {
+	width: 100%;
+	max-width: 600px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.main-content h1 {
+	font-size: 1.6rem;
+	color: #333;
+	margin: 0 0 15px 0;
+	position: relative;
+	display: inline-block;
+	padding: 0 15px;
+}
+
+/* 文字の左右に「カッコ」をつける（手帳のタブ風） */
+.main-content h1::before,
+.main-content h1::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 4px;
+	height: 70%;
+	background-color: #0056b3;
+	/* ログインボタンの青 */
+	border-radius: 2px;
+}
+
+.main-content h1::before {
+	left: 0;
+}
+
+.main-content h1::after {
+	right: 0;
+}
+
+.main-content h1 span {
+	color: #0056b3;
+	font-weight: bold;
+}
+
+.graph-container {
+	height: 540px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	background: transparent;
+	box-shadow: none;
+	padding: 0;
+}
+
+/* 操作パネル */
+.control-panel {
+	background-color: #eee;
+	padding: 12px 25px;
+	border-radius: 50px;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+/* ボタン等の装飾 */
+select,
+button {
+	padding: 8px 16px;
+	border-radius: 20px;
+	border: 1px solid #ddd;
+	font-size: 0.9rem;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+select:hover,
+button:hover {
+	/*触れると浮く動き */
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+	background-color: #0056b3;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.logout-link {
+	color: #888;
+	text-decoration: none;
+	font-size: 0.85rem;
+	margin-left: 10px;
+}
+
+.logout-link:hover {
+	transform: translateY(-1px);
+	opacity: 0.7;
+}
