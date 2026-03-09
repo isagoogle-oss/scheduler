@@ -1,0 +1,40 @@
+src/main/java/com/scheduler/
+ ｜ (entity)
+ ├　User.java
+ ├　DaySchedule.java
+ ｜
+ │ (repository)
+ ├　UserRepository.java
+ ├　DayScheduleRepository.java
+ │  
+ │ (service)
+ ├　ScheduleService.java
+ │
+ ├ (controller)
+ └　ScheduleController.java
+
+
+
+src/main/resources
+ ├ templates
+ ｜├ index.html
+ ｜├ signup.html
+ ｜├ mypage.html
+ ｜└ edit.html
+ ｜
+ └ static
+ 	├ css
+ 	｜├ style01-index.css
+ 	｜├ style02-signup.css
+ 	｜├ style03-edit.css
+ 	｜└ style04-mypage.css
+ 	｜
+ 	├ js
+ 	｜└ mypage.js
+ 	｜
+ 	└ img
+	　├ cork_board.jpg
+ 	　└ Gemini_Generated_Image_2c1ejw2c1ejw2c1e.png
+
+
+
